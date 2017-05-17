@@ -29,6 +29,6 @@
     </bean>
     
 	<!-- Spring Data -->
-    <jpa:repositories base-package="com.dawnbit.scm.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
+    <jpa:repositories base-package="com.gauri.poll.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
 
 </beans>

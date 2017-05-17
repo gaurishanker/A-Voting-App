@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+		<property name="redirectUrl" value="/login" />
+	</bean>
+     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    <property name="securityManager" ref="securityManager"/>
+    <property name="loginUrl" value="/login"/>
+    <property name="successUrl" value="/protected/home"/>
+	<property name="unauthorizedUrl" value="/dashboard"/>
+    
+    <property name="filters">
+      <util:map>
+        <entry key="logout" value-ref="logout"/>
+       </util:map>
+	</property>
+    <property name="filterChainDefinitions">
+        <value>
+        /resources/** = anon
+		/logout = logout
+        /** = authc
+        </value>
+    </property>
+	
+</bean>
+
+
+<bean id="builtInCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    
+    <property name="realm" ref="myRealm"/>
+    <property name="cacheManager" ref="builtInCacheManager"/>
+    
+</bean>
+<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+<bean id="myRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+	<property name="credentialsMatcher" ref="hashMatcher"/> 
+	 <property name="authenticationQuery" value="select password,salt from user_login where user_id = ? and status='Active'"/>
+		<property name="userRolesQuery" value="SELECT ulsg.group_id FROM user_login_security_group as ulsg inner join user_login as ul on ul.user_id=ulsg.user_id WHERE ul.user_id=?"/>
+		<property name="permissionsQuery" value="SELECT permission_id FROM security_group_permission WHERE group_id=?" />
+	 <property name="permissionsLookupEnabled" value="true"></property>
+	 <property name="dataSource" ref="pollDatasource" />
+</bean>
+
+<bean id="hashMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+
+    <property name="hashAlgorithmName" value="SHA-512"/> 
+    <property name="hashIterations" value="10000"/>  
+ <property name="storedCredentialsHexEncoded" value="true"/>
+    
+</bean>
+
+<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    <property name="securityManager" ref="securityManager"/>
+</bean>
+</beans>

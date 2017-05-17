@@ -10,4 +10,5 @@
 	com.gauri.poll.repository "/>
 	<import resource="spring-mvc.xml"/>
 	<import resource="spring-jpa.xml"/>
+	<import resource="spring-shiro.xml"/>
 </beans>
