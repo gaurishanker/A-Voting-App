@@ -1,0 +1,19 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Master -->
+    <definition name="master.page" template="/WEB-INF/views/master/master.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/master/header.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/views/master/sidebar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/master/footer.jsp"/>
+    </definition>
+	 <!-- Unauthorized Error Page -->
+	<definition name="index" extends="master.page">
+		<put-attribute name="body" value="/WEB-INF/views/unprotected/index.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/master/header.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/views/master/sidebar.jsp"/>
+    </definition>
+    
+</tiles-definitions>
+
