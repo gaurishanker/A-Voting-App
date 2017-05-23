@@ -66,7 +66,7 @@
     <servlet-name>dispatcher</servlet-name>
   </filter-mapping>
 
-
+<!--
 <resource-ref>
   <description>
     Resource reference to a factory for java.sql.Connection
@@ -83,7 +83,7 @@
   <res-auth>
     Container
   </res-auth>
-</resource-ref>
+</resource-ref>-->
 
 
 

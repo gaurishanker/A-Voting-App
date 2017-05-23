@@ -25,10 +25,33 @@
 	        <configuration>
 			  <port>4000</port>
 	          <path>/${project.build.finalName}</path>
+			  <additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>
 			  <systemProperties>
 				<log4j.configuration>file:./src/main/resources/log4j.xml</log4j.configuration>
 			  </systemProperties>
 	        </configuration>
+			<dependencies>
+                <dependency>
+				    <groupId>mysql</groupId>
+				    <artifactId>mysql-connector-java</artifactId>
+				    <version>5.1.31</version>
+				</dependency>
+				<dependency>
+                   <groupId>log4j</groupId>
+                   <artifactId>log4j</artifactId>
+                   <version>1.2.16</version>
+               </dependency>
+               <dependency>
+                   <groupId>org.slf4j</groupId>
+                   <artifactId>slf4j-api</artifactId>
+                   <version>1.7.1</version>
+               </dependency>
+               <dependency>
+                   <groupId>org.slf4j</groupId>
+                   <artifactId>slf4j-log4j12</artifactId>
+                   <version>1.7.21</version>
+               </dependency>
+            </dependencies>
 	     </plugin>
      </plugins>
   </build>
@@ -172,6 +195,7 @@
         <artifactId>jstl</artifactId>
         <version>1.2</version>
     </dependency>
+	
     <dependency>
         <groupId>org.hibernate.javax.persistence</groupId>
         <artifactId>hibernate-jpa-2.0-api</artifactId>

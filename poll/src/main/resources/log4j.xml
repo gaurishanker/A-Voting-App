@@ -17,11 +17,11 @@
 		<level value="DEBUG" />
 	</logger>
 
-	<logger name="com.dawnbit.controller">
+	<logger name="com.gauri.controller">
 		<level value="DEBUG" />
 	</logger>
 	
-	<logger name="com.dawnbit.interceptor">
+	<logger name="com.gauri.interceptor">
 		<level value="DEBUG" />
 	</logger>
 	
